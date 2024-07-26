@@ -8,46 +8,237 @@
 
 Перед запуском проекта необходима заполнить базу данных. В корне проекта находится postman коллекция с роутами для создания 
 
+
 ## Бэкенд
-Реализация Express, MongoDB
+Реализация Express, MongoDB, Docker
 
 Есть 6 роутов для работы с API:
 
-* `http://localhost:3500/user/signup` - регистрация пользователя 
+1. `http://localhost:3500/user/signup` - **Регистрация пользователя (метод: POST)** 
 
 ***Request***
- $ {
-    "email": "hr@kaspi.kz",
-    "username": "Testoviy User",
-    "password": "test1234"
-  }
+```json
+{
+  "email": "hr@kaspi.kz",
+  "username": "Testoviy User",
+  "password": "test1234"
+}
+```
 
 ***Response***
-  $ {
+```json
+{
+  "email": "hr@kaspi.kz",
+  "username": "Aliya",
+  "password": "$2a$10$zL7DB5SljmaVqJVt4uZyk.xTbD8bRfjW/zBrOvgOuW6avZDPwSL62",
+  "_id": "66a38fc02ff6d4e81f3b7e0d",
+  "__v": 0
+}
+```
+
+
+2. ` http://localhost:3500/user/login` - **Вход пользователя (метод: POST)**
+
+***Request***
+```json
+{
+  "email": "hr@kaspi.kz",
+  "password": "test1234"
+}
+```
+
+***Response***
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhyQGthc3BpLmt6IiwiaWF0IjoxNzIxOTgyNjg4LCJleHAiOjE3MjE5ODYyODh9.lfsXokNq6iCHxcvzFnXtkCb8jwNkuiTMt3X3gtx90Gc",
+  "user": {
+      "email": "hr@kaspi.kz",
+      "username": "Victoria Robertson"
+  }
+}
+```
+
+
+3. `http://localhost:3500/posts` - **Создание поста (метод: POST)**
+
+***Request***
+```json
+{
+  "title": "HR Test Header",
+  "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s"
+}
+```
+
+***Response***
+```json
+{
+  "post": {
     "email": "hr@kaspi.kz",
-    "username": "Aliya",
-    "password": "$2a$10$zL7DB5SljmaVqJVt4uZyk.xTbD8bRfjW/zBrOvgOuW6avZDPwSL62",
-    "_id": "66a38fc02ff6d4e81f3b7e0d",
+    "title": "HR Test Header",
+    "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+    "_id": "66a337ceb9d88424e54dac07",
     "__v": 0
   }
+}
+```
 
 
-## Фронтенд
-Реализвация Vue3, TS, Pinia
+4. ` http://localhost:3500/posts` - **Получения всех постов, от всех пользователей (метод: GET)**
 
-Была реалзовано только мобильная версия, так как в макете была только она. Реализованно 5 страницы:
-1. sign up
-2. log in
-3. feed
-4. content
-5. profile
+***Request***
+При запросе используется Bearer token 
 
-Команда запуска проекта: 
- $ npm install 
- $ npm run dev
+***Response***
+```json
+[
+    {
+        "_id": "66a26268472a93eeafb26411",
+        "email": "test@gmail.com",
+        "title": "First Header",
+        "body": "My first body",
+        "image": "https://i.pinimg.com/236x/5b/6e/ca/5b6eca63605bea0eeb48db43f77fa0ce.jpg"
+    },
+    {
+        "_id": "66a264ec472a93eeafb26413",
+        "email": "test@gmail.com",
+        "title": "Second Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s"
+    },
+    {
+        "_id": "66a2659d472a93eeafb26415",
+        "email": "test@gmail.com",
+        "title": "Header",
+        "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://media.istockphoto.com/id/1142841058/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%B0%D1%81%D1%82%D0%B0%D0%BD%D0%B0-%D0%BD%D1%83%D1%80-%D1%81%D1%83%D0%BB%D1%82%D0%B0%D0%BD-%D0%BA%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD-%D1%86%D0%B5%D0%BD%D1%82%D1%80-%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B0-%D0%BD%D0%B5%D0%B1%D0%BE%D1%81%D0%BA%D1%80%D0%B5%D0%B1-%D0%B2%D0%B8%D0%B4-%D0%BD%D0%B0-%D0%B1%D0%B0%D0%B9%D1%82%D0%B5%D1%80%D0%B5%D0%BA.jpg?s=1024x1024&w=is&k=20&c=fvsNdf7qmsmvA1FZDvWOYnmK_xUt3xvFfYKT8Cfsec8="
+    },
+    {
+        "_id": "66a278ca472a93eeafb26418",
+        "email": "hr@kaspi.kz",
+        "title": "First HR Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s"
+    },
+    {
+        "_id": "66a32326415626144440edc7",
+        "email": "hr@kaspi.kz",
+        "title": "Second Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    },
+    {
+        "_id": "66a328dfb9d88424e54dabc8",
+        "email": "hr@kaspi.kz",
+        "title": "HR Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    },
+    {
+        "_id": "66a328e4b9d88424e54dabca",
+        "email": "hr@kaspi.kz",
+        "title": "HR Test Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    },
+    {
+        "_id": "66a328efb9d88424e54dabcd",
+        "email": "hr@kaspi.kz",
+        "title": "HR Test Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    },
+    {
+        "_id": "66a337ceb9d88424e54dac07",
+        "email": "hr@kaspi.kz",
+        "title": "HR Test Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    }
+]
+```
 
 
+5. `http://localhost:3500/posts/user-posts` - **Получения постов, от пользователя который авторизован (метод: GET)**
 
+***Request***
+При запросе используется Bearer token 
+
+***Response***
+```json
+[
+    {
+        "_id": "66a278ca472a93eeafb26418",
+        "email": "hr@kaspi.kz",
+        "title": "First HR Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s"
+    },
+    {
+        "_id": "66a32326415626144440edc7",
+        "email": "hr@kaspi.kz",
+        "title": "Second Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    },
+    {
+        "_id": "66a328dfb9d88424e54dabc8",
+        "email": "hr@kaspi.kz",
+        "title": "HR Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    },
+    {
+        "_id": "66a328e4b9d88424e54dabca",
+        "email": "hr@kaspi.kz",
+        "title": "HR Test Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    },
+    {
+        "_id": "66a328efb9d88424e54dabcd",
+        "email": "hr@kaspi.kz",
+        "title": "HR Test Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    },
+    {
+        "_id": "66a337ceb9d88424e54dac07",
+        "email": "hr@kaspi.kz",
+        "title": "HR Test Header",
+        "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+        "__v": 0
+    }
+]
+```
+
+6. `http://localhost:3500/posts/:id` - **Получения поста (метод: GET)**
+
+***Request***
+При запросе используется Bearer token 
+
+***Response***
+```json
+{
+  "_id": "66a32326415626144440edc7",
+  "email": "hr@kaspi.kz",
+  "title": "Second Header",
+  "body": " Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+  "__v": 0
+}
+```
 
 ## Использование Docker Compose
 
@@ -63,23 +254,11 @@ Docker Compose применяется для управления жизненн
 docker-compose up --build
 ```
 
-После этого приложение станет доступно в браузере по адресу http://localhost:8081.
-
 ## Конфигурация `docker-compose.yml`
 
 **Порты**: 
 
-* Сервис проксирует порт 80 контейнера на порт 8081 локальной машины.
-
-**Тома**:
-
-* Локальная директория src синхронизирована с /usr/src/app в контейнере для поддержания среды разработки в актуальном состоянии.
-* Том /usr/src/app/node_modules создан, чтобы локальная директория node_modules не перекрывала соответствующую директорию в контейнере.
-
-**Переменные окружения**:
-
-* VUE_APP_URL: URL для запросов к API бэкенда.
-* VUE_APP_PUBLIC_KEY: Публичный ключ для аутентификации и шифрования данных внутри приложения.
+* Сервис проксирует порт 3500 контейнера на порт 3500 локальной машины.
 
 ### Остановка и Удаление Контейнеров
 
@@ -88,36 +267,35 @@ docker-compose up --build
 ```bash
 docker-compose down
 ```
-
 ### Конфигурация и Скрипты
 * `Dockerfile`: Содержит многоэтапную конфигурацию сборки как для сред разработки, так и для продуктивной среды.
 * `docker-compose.yml`: Используется для конфигурации и оркестрации Docker контейнеров.
-* `devops/nginx.conf`: Конфигурация Nginx, настроенная для обслуживания приложения.
-* `devops/substitute_environment_variables.sh`: Скрипт, который выполняется при запуске контейнера для внедрения переменных окружения.
-
-### Участие в разработке
-
-Для того чтобы начать участие в разработке проекта, необходимо сначала настроить рабочее окружение и получить доступы к инструментам и сервисам проекта:
 
 
-1. **Доступ к репозиторию GitLab**: Отправьте свои учетные данные (обычно это имя пользователя и email) администратору проекта на GitLab, чтобы он мог добавить вас в проект. После того как вас добавят в проект, вы сможете клонировать репозиторий и начать работу.
+## Фронтенд
+Реализация Vue3, TS, Pinia
 
-2. **Регистрация в Jira**: Подайте заявление на доступ к доске проекта в Jira, указав свою электронную почту и роль в проекте. Это позволит вам отслеживать и управлять задачами проекта.
+Была реалзовано только мобильная версия, так как в макете была только она. Реализованно 5 страницы:
+1. sign up
+2. log in
+3. feed
+4. content
+5. profile
 
-3. **Корпоративная электронная почта**: Вам будет предоставлена корпоративная почта, через которую вы будете получать все необходимые уведомления и сможете связываться с членами команды.
+Команда запуска проекта: 
+```bash
+ $ npm install 
+ $ npm run dev
+```
+
+После этого приложение станет доступно в браузере по адресу http://localhost:5173.
+
+**Переменные окружения**:
+
+* VITE_USER: URL для запросов к API бэкенда(создание пользователя).
+* VITE_POSTS: URL для получения и работы с постами.
 
 
-После получения доступа, пожалуйста, ознакомьтесь и следуйте нижеизложенной процедуре работы:
 
-### Именование веток
+## При возникновении проблем с проектом обращайтесь в [телеграмм](https://t.me/TDD_Green)
 
-* Все новые фичи должны разрабатываться в отдельных ветках, созданных из ветки dev. Имя ветки должно соответствовать формату: feature/short-feature-description.
-* Для исправления ошибок используйте ветки, именованные по шаблону: bugfix/description-of-the-bug.
-* Ветки для реализации алгоритмов или улучшений следует называть: enhancement/enhancement-description.
-
-### Процесс Merge Request:
-
-* Разработайте новую функциональность или bugfix в отдельной ветке, созданной из dev.
-* По завершении разработки проведите саморевью и убедитесь, что весь код соответствует стилевым и архитектурным стандартам.
-* Создайте Merge Request в ветку dev, добавив описание того, что было сделано, и ссылку на соответствующую задачу в Jira.
-* Пройдите code review и в случае необходимости внесите исправления.

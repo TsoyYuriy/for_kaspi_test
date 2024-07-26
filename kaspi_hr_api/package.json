@@ -1,12 +1,12 @@
 {
-  "name": "auth",
+  "name": "kaspi_hr_api",
   "version": "1.0.0",
   "description": "",
   "main": "/api/server.js",
   "scripts": {
     "dev": "nodemon ./api/server.js"
   },
-  "author": "",
+  "author": "Yuriy Tsoy",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
