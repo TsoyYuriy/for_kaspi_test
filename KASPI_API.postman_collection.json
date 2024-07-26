@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "d948f040-707e-482d-a3f9-faa691b218d7",
+		"name": "KASPI_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23543497"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"hr@kaspi.kz\",\n    \"password\": \"test1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3500/user/login"
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"hr@kaspi.kz\",\n    \"username\": \"Aliya\",\n    \"password\": \"test1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3500/user/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "create-post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhyQGthc3BpLmt6IiwiaWF0IjoxNzIxOTcyNjc2LCJleHAiOjE3MjE5NzYyNzZ9.PjQJJgwrCqW_LiXUE0twcA38_mVbU2hEZwIi9w6sx9w"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"HR Test Header\",\n  \"body\": \" Lorem ipsum dolor sit amet consectetur adipisicing elit. A, soluta, quam quo quasi quod totam nam tempore tenetur reiciendis impedit dolorem necessitatibus et? Recusandae vel eos fuga. Dolorum, voluptas aperiam.\",\n  \"image\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3500/posts"
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-posts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhyQGthc3BpLmt6IiwiaWF0IjoxNzIxOTMwODYzLCJleHAiOjE3MjE5MzQ0NjN9.X3OxLHNVI2NY_lE5fhjVhmHlALORBkhHHc9oVCirwOo"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3500/posts"
+			},
+			"response": []
+		},
+		{
+			"name": "get-user-posts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhyQGthc3BpLmt6IiwiaWF0IjoxNzIxOTgyNjg4LCJleHAiOjE3MjE5ODYyODh9.lfsXokNq6iCHxcvzFnXtkCb8jwNkuiTMt3X3gtx90Gc"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3500/posts/user-posts"
+			},
+			"response": []
+		},
+		{
+			"name": "get-user-post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhyQGthc3BpLmt6IiwiaWF0IjoxNzIxOTY3MTczLCJleHAiOjE3MjE5NzA3NzN9.4bVtgTvfhTMX-s4uD5kI8d-uKPP9NI25jo_3sgaNWi8"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3500/posts/66a32326415626144440edc7"
+			},
+			"response": []
+		}
+	]
+}

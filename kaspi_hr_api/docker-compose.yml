@@ -1,0 +1,22 @@
+version: '3.8'
+services:     
+  api:         
+    build: . 
+    environment:
+      - DATABASE_URL=mongodb://mongo_db:27017/kaspi_data
+    container_name: kaspi_api_backend
+    ports:      
+      - '3500:3500'
+    volumes: 
+      - ./api:/app
+      - /app/node_modules
+    restart: always
+    depends_on:
+      - mongo_db
+    
+  mongo_db: 
+    image: mongo
+    container_name: mongo_data_kaspi
+    ports:
+      - '27017:27017'
+    restart: always

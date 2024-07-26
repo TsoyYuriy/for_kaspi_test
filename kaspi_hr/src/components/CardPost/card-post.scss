@@ -1,0 +1,53 @@
+@import '@/assets/styles/global.scss';
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-sizing: border-box;
+  &__wrap-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  &__img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+  }
+  &__content {
+    flex-basis: 65%;
+    flex-grow: 1;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E8E8E8; 
+  }
+  &__title {
+    @include title(#000, 16px);
+    margin-bottom: 8px;
+  }
+  &__text {
+    @include text(#000);
+    height: 34px;
+    overflow: hidden;
+  }
+}
+
+.card-post {
+
+  &__img-wrap {
+    height: 240px;
+    width: 343px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    & img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+  }
+  &__text {
+    @include text(#000);
+  }
+}

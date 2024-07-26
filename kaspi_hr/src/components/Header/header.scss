@@ -1,0 +1,33 @@
+@import '@/assets/styles/global.scss';
+
+.header {
+  padding: 16px 0 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  text-align: center;
+  margin-bottom: 32px;
+  flex-shrink: 0;
+  width: 100%;
+  &__title {
+    @include title(#000, 30px);
+  }
+  &__link {
+    text-align: right;
+  }
+  &_btn-back,
+  &__btn-link {
+    border: none;
+    background: none;
+    color: #5db075;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+    text-align: left;
+  }
+}
+
+.header__profile {
+  background: #5DB075;
+  height: 245px;
+}

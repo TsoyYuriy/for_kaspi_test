@@ -1,0 +1,32 @@
+.search-input {
+  padding: 16px;
+  box-sizing: border-box;
+  background: #f6f6f6;
+  border: 1px solid #e8e8e8;
+  border-radius: 100px;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  color: #5db075;
+
+  &::placeholder {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+    color: #bdbdbd;
+  }
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px ;
+}
+
+.posts {
+  height: 450px;
+  overflow: auto;
+}
